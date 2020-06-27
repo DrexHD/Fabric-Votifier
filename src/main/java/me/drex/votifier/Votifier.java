@@ -29,6 +29,7 @@ public class Votifier implements DedicatedServerModInitializer {
         this.server = server;
         this.address = server.getServerIp() == null ? "0.0.0.0" : server.getServerIp();
         VotifierConfig.load();
+        if(VotifierConfig.main().enabled)
         start();
     }
 
@@ -46,7 +47,6 @@ public class Votifier implements DedicatedServerModInitializer {
 
     private void start() {
         File rsaDirectory = path.toFile();
-
         try {
             if (!rsaDirectory.exists()) {
                 rsaDirectory.mkdir();
