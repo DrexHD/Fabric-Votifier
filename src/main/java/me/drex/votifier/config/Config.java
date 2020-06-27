@@ -9,9 +9,9 @@ import java.util.List;
 @ConfigSerializable
 public class Config {
 
-    public static final String HEADER = "KiloEssentials! Main Configuration File\n" +
-            "Licensed Under the MIT License, Copyright (c) 2020 KiloCraft\n" +
-            "KiloEssentials is using HOCON for its configuration files\n learn more about it here: " +
+    public static final String HEADER = "Votifier! Configuration File\n" +
+            "Licensed Under the MIT License, Copyright (c) 2020\n" +
+            "Votifier is using HOCON for its configuration files\n learn more about it here: " +
             "https://docs.spongepowered.org/stable/en/server/getting-started/configuration/hocon.html";
 
     @Setting(value = "enabled")
