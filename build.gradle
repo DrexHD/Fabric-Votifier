@@ -28,8 +28,8 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
     //snakeyaml config
-    compile group: 'org.yaml', name: 'snakeyaml', version: '${project.snake_yaml_version}'
-    shadow group: 'org.yaml', name: 'snakeyaml', version: '${project.snake_yaml_version}'
+    compile "org.yaml:snakeyaml:${project.snake_yaml_version}"
+    shadow "org.yaml:snakeyaml:${project.snake_yaml_version}"
 
     compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.2.4'
 
