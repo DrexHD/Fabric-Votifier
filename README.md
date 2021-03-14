@@ -1,8 +1,9 @@
-#Fabric Votifier
+# Fabric Votifier
 Fabric Votifier is a minecraft fabric mod that allows server owners to reward players for voting!
+
 Original source: https://github.com/vexsoftware/votifier
 
-##Setup
+## Setup
 1. Download the jar from release tab or [build](#how-to-build) it.
 2. Put the jar in your `/mods` folder
 3. Start the server to generate config files
@@ -10,7 +11,7 @@ Original source: https://github.com/vexsoftware/votifier
 5. `/reload` or restart your server for the changes to take place
 6. Setup vote sites (public key can be found at `/votifier/public.key`)
 
-##How to build
+## How to build
 1. Edit build.gradle and mod.json to suit your needs.
 2. Run the following command:
 ```
