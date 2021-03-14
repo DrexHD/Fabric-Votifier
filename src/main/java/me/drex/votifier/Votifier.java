@@ -1,6 +1,6 @@
 package me.drex.votifier;
 
-import me.drex.votifier.config.VotifierConfig;
+import me.drex.votifier.config.YAMLConfig;
 import me.drex.votifier.rsa.RSAIO;
 import me.drex.votifier.rsa.RSAKeygen;
 import net.fabricmc.api.DedicatedServerModInitializer;
@@ -18,7 +18,6 @@ public class Votifier implements DedicatedServerModInitializer {
     private static final Path path = new File(System.getProperty("user.dir")).toPath().resolve("votifier");
     private static Votifier instance;
     private final MinecraftServer server;
-    private String version;
     private VoteReceiver voteReceiver;
     private KeyPair keyPair;
     private String address;
@@ -28,9 +27,9 @@ public class Votifier implements DedicatedServerModInitializer {
         Votifier.instance = this;
         this.server = server;
         this.address = server.getServerIp() == null ? "0.0.0.0" : server.getServerIp();
-        VotifierConfig.load();
-        if(VotifierConfig.main().enabled)
-        start();
+        loadRSA();
+        YAMLConfig.load();
+        if (YAMLConfig.enabled) start();
     }
 
     public static Votifier getInstance() {
@@ -45,7 +44,7 @@ public class Votifier implements DedicatedServerModInitializer {
         return LOGGER;
     }
 
-    private void start() {
+    private void loadRSA() {
         File rsaDirectory = path.toFile();
         try {
             if (!rsaDirectory.exists()) {
@@ -59,19 +58,26 @@ public class Votifier implements DedicatedServerModInitializer {
             LOGGER.error("Error reading RSA keys", ex);
             return;
         }
+    }
 
+    private void start() {
         // Initialize the VoteReceiver.
-        int port = VotifierConfig.main().port;
+        int port = YAMLConfig.port;
 
         try {
-            voteReceiver = new VoteReceiver(this, address, port);
+            voteReceiver = new VoteReceiver(address, port);
             voteReceiver.start();
 
-            LOGGER.info("Votifier enabled.");
+            LOGGER.info("Votifier started.");
         } catch (Exception e) {
             LOGGER.error(e);
         }
+    }
 
+    public void reload() {
+        stop();
+        YAMLConfig.load();
+        start();
     }
 
 
@@ -80,11 +86,7 @@ public class Votifier implements DedicatedServerModInitializer {
         if (voteReceiver != null) {
             voteReceiver.shutdown();
         }
-        LOGGER.info("Votifier disabled.");
-    }
-
-    public String getVersion() {
-        return version;
+        LOGGER.info("Votifier stopped.");
     }
 
     public KeyPair getKeyPair() {

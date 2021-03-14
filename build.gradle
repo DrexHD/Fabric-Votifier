@@ -27,12 +27,9 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-    //hocon config
-    compile "org.spongepowered:configurate-hocon:${project.configurate_version}"
-    shadow "org.spongepowered:configurate-hocon:${project.configurate_version}"
-
-	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
-	// You may need to force-disable transitiveness on them.
+    //snakeyaml config
+    compile group: 'org.yaml', name: 'snakeyaml', version: '${project.snake_yaml_version}'
+    shadow group: 'org.yaml', name: 'snakeyaml', version: '${project.snake_yaml_version}'
 
     compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.2.4'
 

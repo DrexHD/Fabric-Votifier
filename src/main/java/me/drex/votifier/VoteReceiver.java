@@ -1,7 +1,7 @@
 package me.drex.votifier;
 
 import com.mojang.authlib.GameProfile;
-import me.drex.votifier.config.VotifierConfig;
+import me.drex.votifier.config.YAMLConfig;
 import me.drex.votifier.rsa.RSA;
 import net.minecraft.SharedConstants;
 import net.minecraft.server.MinecraftServer;
@@ -20,7 +20,6 @@ import java.net.SocketException;
 public class VoteReceiver extends Thread {
 
 
-    private final Votifier plugin;
 
     private final String host;
 
@@ -30,8 +29,7 @@ public class VoteReceiver extends Thread {
 
     private boolean running = true;
 
-    public VoteReceiver(final Votifier plugin, String host, int port) throws Exception {
-        this.plugin = plugin;
+    public VoteReceiver(String host, int port) throws Exception {
         this.host = host;
         this.port = port;
         initialize();
@@ -74,7 +72,7 @@ public class VoteReceiver extends Thread {
                 InputStream in = socket.getInputStream();
 
                 // Send them our version.
-                writer.write("VOTIFIER " + Votifier.getInstance().getVersion());
+                writer.write("Fabric-Votifier");
                 writer.newLine();
                 writer.flush();
 
@@ -113,9 +111,9 @@ public class VoteReceiver extends Thread {
 
                 MinecraftServer server = Votifier.getInstance().getServer();
                 ServerCommandSource source = server.getCommandSource();
-                for (String command : VotifierConfig.main().commands) {
+                for (String command : YAMLConfig.commands) {
                     GameProfile gameProfile = server.getUserCache().findByName(vote.getUsername());
-                    String name = gameProfile.isComplete() ? gameProfile.getName() : vote.getUsername();
+                    String name = (gameProfile != null && gameProfile.isComplete()) ? gameProfile.getName() : vote.getUsername();
                     command = command.replace("%PLAYER%", name)
                             .replace("%SERVICE%", vote.getServiceName())
                             .replace("%TIMESTAMP%", vote.getTimeStamp())

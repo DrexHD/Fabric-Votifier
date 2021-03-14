@@ -30,4 +30,10 @@ public class Vote {
         return address;
     }
 
+    public String toString() {
+        return String.join("", "Vote[userName=" , username,
+                ", serviceName=", serviceName,
+                ", timeStamp=", timeStamp,
+                ", address=", address, "]");
+    }
 }

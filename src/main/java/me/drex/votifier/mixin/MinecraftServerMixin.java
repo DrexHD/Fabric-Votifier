@@ -1,7 +1,7 @@
 package me.drex.votifier.mixin;
 
 import me.drex.votifier.Votifier;
-import me.drex.votifier.config.VotifierConfig;
+import me.drex.votifier.config.YAMLConfig;
 import net.minecraft.server.MinecraftServer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -26,7 +26,7 @@ public class MinecraftServerMixin {
 
     @Inject(method = "reloadResources", at = @At(value = "HEAD"))
     private void votifier$reload(CallbackInfoReturnable<CompletableFuture<Void>> cir) {
-        VotifierConfig.load();
+        Votifier.getInstance().reload();
     }
 
 
