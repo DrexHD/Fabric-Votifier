@@ -16,14 +16,14 @@ public class YAMLConfig {
     }};
     public static boolean enabled = true;
     public static int port = 8192;
-    private static Yaml yaml = new Yaml();
-    private static HashMap<String, Object> data = new HashMap<>();
-    private static File CONFIG_FILE = Votifier.getPath().resolve("config.yaml").toFile();
+    private static final Yaml yaml = new Yaml();
+    private static final HashMap<String, Object> data = new HashMap<>();
+    private static final File CONFIG_FILE = Votifier.getPath().resolve("config.yaml").toFile();
 
     public static void load() {
         if (CONFIG_FILE.exists()) {
             try {
-                HashMap<String, Object> config = (HashMap<String, Object>) yaml.load(new FileInputStream(CONFIG_FILE));
+                HashMap<String, Object> config = yaml.load(new FileInputStream(CONFIG_FILE));
                 enabled = (boolean) config.getOrDefault("enabled", enabled);
                 port = (int) config.getOrDefault("port", port);
                 commands = (List<String>) config.getOrDefault("commands", commands);
