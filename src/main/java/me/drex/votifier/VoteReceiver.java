@@ -15,6 +15,7 @@ import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.Optional;
 
 
 public class VoteReceiver extends Thread {
@@ -112,8 +113,8 @@ public class VoteReceiver extends Thread {
                 MinecraftServer server = Votifier.getInstance().getServer();
                 ServerCommandSource source = server.getCommandSource();
                 for (String command : YAMLConfig.commands) {
-                    GameProfile gameProfile = server.getUserCache().findByName(vote.getUsername());
-                    String name = (gameProfile != null && gameProfile.isComplete()) ? gameProfile.getName() : vote.getUsername();
+                    Optional<GameProfile> optional = server.getUserCache().findByName(vote.getUsername());
+                    String name = (optional.isPresent() && optional.get().isComplete()) ? optional.get().getName() : vote.getUsername();
                     command = command.replace("%PLAYER%", name)
                             .replace("%SERVICE%", vote.getServiceName())
                             .replace("%TIMESTAMP%", vote.getTimeStamp())
