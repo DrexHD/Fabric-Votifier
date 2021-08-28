@@ -73,7 +73,7 @@ public class VoteReceiver extends Thread {
                 InputStream in = socket.getInputStream();
 
                 // Send them our version.
-                writer.write("Fabric-Votifier");
+                writer.write("VOTIFIER");
                 writer.newLine();
                 writer.flush();
 
