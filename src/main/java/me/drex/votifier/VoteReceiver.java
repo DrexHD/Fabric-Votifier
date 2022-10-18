@@ -20,8 +20,6 @@ import java.util.Optional;
 
 public class VoteReceiver extends Thread {
 
-
-
     private final String host;
 
     private final int port;
@@ -119,7 +117,7 @@ public class VoteReceiver extends Thread {
                             .replace("%SERVICE%", vote.getServiceName())
                             .replace("%TIMESTAMP%", vote.getTimeStamp())
                             .replace("%ADDRESS%", vote.getAddress());
-                    server.getCommandManager().execute(source, command);
+                    server.getCommandManager().executeWithPrefix(source, command);
                 }
 
 

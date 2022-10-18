@@ -1,6 +1,5 @@
 plugins {
-    id 'com.github.johnrengelman.shadow' version '5.1.0'
-    id 'fabric-loom' version '0.8-SNAPSHOT'
+    id 'fabric-loom' version '0.12-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -16,28 +15,19 @@ repositories {
     maven { url 'https://repo.spongepowered.org/maven'}
 }
 
-shadowJar {
-    classifier = "shadow"
-    configurations = [project.configurations.shadow]
-}
-
 dependencies {
 	//to change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-    //snakeyaml config
+    // snakeyaml config
     implementation "org.yaml:snakeyaml:${project.snake_yaml_version}"
-    shadow "org.yaml:snakeyaml:${project.snake_yaml_version}"
+    include "org.yaml:snakeyaml:${project.snake_yaml_version}"
 
     implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.2.4'
-    shadow group: 'javax.xml.bind', name: 'jaxb-api', version: '2.2.4'
+    include group: 'javax.xml.bind', name: 'jaxb-api', version: '2.2.4'
 
-}
-
-task remapJar(type: net.fabricmc.loom.task.RemapJarTask, overwrite: true) {
-    from zipTree(shadowJar.archiveFile) dependsOn shadowJar
 }
 
 processResources {
