@@ -1,4 +1,4 @@
-package me.drex.votifier;
+package me.drex.votifier.data;
 
 public class Vote {
 

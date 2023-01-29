@@ -68,7 +68,7 @@ public class Votifier implements DedicatedServerModInitializer {
             voteReceiver = new VoteReceiver(address, port);
             voteReceiver.start();
 
-            LOGGER.info("Votifier started.");
+            LOGGER.info("Votifier started on {}.", port);
         } catch (Exception e) {
             LOGGER.error(e);
         }

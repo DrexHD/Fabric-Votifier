@@ -2,6 +2,7 @@ package me.drex.votifier;
 
 import com.mojang.authlib.GameProfile;
 import me.drex.votifier.config.YAMLConfig;
+import me.drex.votifier.data.Vote;
 import me.drex.votifier.rsa.RSA;
 import net.minecraft.SharedConstants;
 import net.minecraft.server.MinecraftServer;
