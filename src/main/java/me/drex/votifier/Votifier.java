@@ -56,7 +56,6 @@ public class Votifier implements DedicatedServerModInitializer {
             }
         } catch (Exception ex) {
             LOGGER.error("Error reading RSA keys", ex);
-            return;
         }
     }
 

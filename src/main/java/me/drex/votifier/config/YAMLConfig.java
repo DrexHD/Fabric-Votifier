@@ -10,7 +10,7 @@ import java.util.List;
 
 public class YAMLConfig {
 
-    public static List<String> commands = new ArrayList<String>() {{
+    public static List<String> commands = new ArrayList<>() {{
         this.add("tellraw @a [{\"text\":\"%PLAYER% voted on %SERVICE%\",\"color\":\"green\"}]");
         this.add("scoreboard players add %PLAYER% voted 1");
     }};
