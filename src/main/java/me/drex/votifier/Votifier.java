@@ -4,6 +4,7 @@ import me.drex.votifier.config.YAMLConfig;
 import me.drex.votifier.rsa.RSAIO;
 import me.drex.votifier.rsa.RSAKeygen;
 import net.fabricmc.api.DedicatedServerModInitializer;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.server.MinecraftServer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,6 +16,7 @@ import java.security.KeyPair;
 public class Votifier implements DedicatedServerModInitializer {
     private static final Logger LOGGER = LogManager.getLogger("Votifier");
 
+    public static final String VERSION = FabricLoader.getInstance().getModContainer("votifier").get().getMetadata().getVersion().getFriendlyString();
     private static final Path path = new File(System.getProperty("user.dir")).toPath().resolve("votifier");
     private static Votifier instance;
     private final MinecraftServer server;
