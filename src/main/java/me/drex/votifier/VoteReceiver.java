@@ -106,7 +106,7 @@ public class VoteReceiver extends Thread {
                 // Create the vote.
                 final Vote vote = new Vote(username, serviceName, timeStamp, address);
 
-                if (SharedConstants.isDevelopment)
+                if (YAMLConfig.debug)
                     Votifier.getLogger().info("Received vote record -> " + vote);
 
                 MinecraftServer server = Votifier.getInstance().getServer();
@@ -129,10 +129,9 @@ public class VoteReceiver extends Thread {
             } catch (SocketException ex) {
                 Votifier.getLogger().error("Protocol error. Ignoring packet - " + ex.getLocalizedMessage());
             } catch (BadPaddingException ex) {
-                Votifier.getLogger().error(
-                        "Unable to decrypt vote record. Make sure that that your public key");
-                Votifier.getLogger().error(
-                        "matches the one you gave the server list.", ex);
+                if (YAMLConfig.debug)
+                    Votifier.getLogger().error(
+                        "Unable to decrypt vote record. Make sure that that your public key matches the one you gave the server list.", ex);
             } catch (Exception ex) {
                 Votifier.getLogger().error(
                         "Exception caught while receiving a vote notification",

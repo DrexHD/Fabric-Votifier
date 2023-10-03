@@ -16,6 +16,7 @@ public class YAMLConfig {
     }};
     public static boolean enabled = true;
     public static int port = 8192;
+    public static boolean debug = false;
     private static final Yaml yaml = new Yaml();
     private static final HashMap<String, Object> data = new HashMap<>();
     private static final File CONFIG_FILE = Votifier.getPath().resolve("config.yaml").toFile();
@@ -27,6 +28,7 @@ public class YAMLConfig {
                 enabled = (boolean) config.getOrDefault("enabled", enabled);
                 port = (int) config.getOrDefault("port", port);
                 commands = (List<String>) config.getOrDefault("commands", commands);
+                debug = (boolean) config.getOrDefault("debug", debug);
             } catch (Exception ex) {
                 Votifier.getLogger().error("Couldn't load config", ex);
             }
@@ -43,6 +45,7 @@ public class YAMLConfig {
             data.put("enabled", enabled);
             data.put("port", 8192);
             data.put("commands", commands);
+            data.put("debug", debug);
             yaml.dump(data, writer);
             FileOutputStream fileOutputStream = new FileOutputStream(CONFIG_FILE);
             fileOutputStream.write(writer.toString().getBytes());
