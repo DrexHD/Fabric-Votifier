@@ -113,7 +113,7 @@ public class VoteReceiver extends Thread {
                 ServerCommandSource source = server.getCommandSource();
                 for (String command : YAMLConfig.commands) {
                     Optional<GameProfile> optional = server.getUserCache().findByName(vote.getUsername());
-                    String name = (optional.isPresent() && optional.get().isComplete()) ? optional.get().getName() : vote.getUsername();
+                    String name = optional.isPresent() ? optional.get().getName() : vote.getUsername();
                     String result = command.replace("%PLAYER%", name)
                             .replace("%SERVICE%", vote.getServiceName())
                             .replace("%TIMESTAMP%", vote.getTimeStamp())
