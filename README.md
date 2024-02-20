@@ -1,3 +1,8 @@
+> [!NOTE]  
+> **This repository has been archived.** 
+> Please use [NuVotifier-Fabric](https://github.com/DrexHD/NuVotifier-Fabric) and a 
+> vote listener like [VoteListener](https://github.com/DrexHD/VoteListener) instead!
+
 # Fabric Votifier
 Fabric Votifier is a minecraft fabric mod that allows server owners to reward players for voting!
 
